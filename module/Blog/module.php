@@ -6,10 +6,16 @@
  * Time: 下午2:34
  */
 namespace Blog;
+use Blog\Model\Article;
+use Blog\Model\ArticleTable;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Module implements ConfigProviderInterface,AutoloaderProviderInterface{
+class Module implements ConfigProviderInterface,AutoloaderProviderInterface,ServiceProviderInterface{
 
     /**
      * Returns configuration to merge with application configuration
@@ -34,5 +40,30 @@ class Module implements ConfigProviderInterface,AutoloaderProviderInterface{
             ]
         ];
     }
+
+    /**
+     * Expected to return \Zend\ServiceManager\Config object or array to
+     * seed such an object.
+     *
+     * @return array|\Zend\ServiceManager\Config
+     */
+    public function getServiceConfig(){
+        return [
+            'factories'=>[
+                'ArticleTable'=>function(ServiceLocatorInterface $sm){
+                    $tableGateway = $sm->get('ArticleTableGateway');
+                    $table = new ArticleTable($tableGateway);
+                    return $table;
+                },
+                'ArticleTableGateway' => function(ServiceLocatorInterface $sm){
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Article());
+                    return new TableGateway('tbl_article',$dbAdapter,null,$resultSetPrototype);
+                }
+            ]
+        ];
+    }
+
 
 }
