@@ -50,7 +50,7 @@ class Module implements ConfigProviderInterface,AutoloaderProviderInterface,Serv
     public function getServiceConfig(){
         return [
             'factories'=>[
-                'ArticleTable'=>function(ServiceLocatorInterface $sm){
+                'ArticleTable' => function(ServiceLocatorInterface $sm){
                     $tableGateway = $sm->get('ArticleTableGateway');
                     $table = new ArticleTable($tableGateway);
                     return $table;
@@ -60,6 +60,17 @@ class Module implements ConfigProviderInterface,AutoloaderProviderInterface,Serv
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Article());
                     return new TableGateway('tbl_article',$dbAdapter,null,$resultSetPrototype);
+                },
+                'Smarty' => function(ServiceLocatorInterface $sm){
+                    $smarty = new \Smarty();
+                    //$smarty->debugging = true;
+                    $smarty->caching = true;
+                    $smarty->cache_lifetime = 120;
+                    $smarty->setTemplateDir(__DIR__ . '/view/smarty/templates');
+                    $smarty->setConfigDir(__DIR__ . '/view/smarty/configs');
+                    $smarty->setCompileDir(__DIR__ . '/view/smarty/templates_c');
+                    $smarty->setCacheDir(__DIR__ . '/view/smarty/cache');
+                    return $smarty;
                 }
             ]
         ];

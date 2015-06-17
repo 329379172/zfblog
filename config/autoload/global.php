@@ -18,12 +18,12 @@ return [
         ]
     ],
     'db' => [
-        'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=blog;host:127.0.0.1',
+        'driver'         => 'Pdo',
+        'dsn'            => 'mysql:dbname=blog;host=10.10.1.183',
         'driver_options' => [
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ],
         'username' => 'root',
-        'password' => 'xiaoqiu'
+        'password' => '123456'
     ]
 ];
