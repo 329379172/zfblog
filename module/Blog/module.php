@@ -8,6 +8,8 @@
 namespace Blog;
 use Blog\Model\Article;
 use Blog\Model\ArticleTable;
+use Blog\Model\User;
+use Blog\Model\UserTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
@@ -61,10 +63,21 @@ class Module implements ConfigProviderInterface,AutoloaderProviderInterface,Serv
                     $resultSetPrototype->setArrayObjectPrototype(new Article());
                     return new TableGateway('tbl_article',$dbAdapter,null,$resultSetPrototype);
                 },
+                'UserTable' => function(ServiceLocatorInterface $sm){
+                    $tableGateway = $sm->get('UserTableGateway');
+                    $table = new UserTable($tableGateway);
+                    return $table;
+                },
+                'UserTableGateway' => function(ServiceLocatorInterface $sm){
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new User());
+                    return new TableGateway('tbl_user',$dbAdapter,null,$resultSetPrototype);
+                },
                 'Smarty' => function(ServiceLocatorInterface $sm){
                     $smarty = new \Smarty();
-                    //$smarty->debugging = true;
-                    $smarty->caching = true;
+                    $smarty->debugging = false;
+                    $smarty->caching = false;
                     $smarty->cache_lifetime = 120;
                     $smarty->setTemplateDir(__DIR__ . '/view/smarty/templates');
                     $smarty->setConfigDir(__DIR__ . '/view/smarty/configs');

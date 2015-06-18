@@ -9,12 +9,22 @@ return [
     'router' => [
         'routes' => [
             'home' => [
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Literal',
                 'options' => [
-                    'route'    => '/blog',
+                    'route'    => '/admin',
                     'defaults' =>[
-                        'controller' => 'Blog\Controller\Index',
+                        'controller' => 'Admin\Index',
                         'action'     => 'index',
+                    ]
+                ]
+            ],
+            'login' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/admin/login',
+                    'defaults' => [
+                        'controller' => 'Admin\Index',
+                        'action'    => 'login'
                     ]
                 ]
             ]
@@ -22,7 +32,8 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            'Blog\Controller\Index' => 'Blog\Controller\IndexController'
+            'Admin\Index' => 'Blog\Controller\Admin\IndexController'
         ]
-    ]
+    ],
+    'password_additional' => 'linfeiyang'
 ];
