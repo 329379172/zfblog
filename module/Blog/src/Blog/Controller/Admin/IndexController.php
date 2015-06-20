@@ -5,7 +5,7 @@
  * Date: 15/6/15
  * Time: 下午2:54
  */
-namespace Blog\Admin\Controller;
+namespace Blog\Controller\Admin;
 
 use Zend\Mvc\Controller\AbstractActionController;
 
