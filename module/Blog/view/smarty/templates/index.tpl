@@ -84,4 +84,9 @@ This is an example of the html_options function:
     </select>
 </form>
 
+
+{section name=article loop=$art}
+  {$art.title}
+{/section}
+
 {include file="footer.tpl"}

@@ -11,4 +11,5 @@ composer.lock
 composer.phar
 module/Blog/view/smarty/templates_c
 module/Blog/view/smarty/cache
+.idea
 

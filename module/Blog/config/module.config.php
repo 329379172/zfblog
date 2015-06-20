@@ -13,7 +13,7 @@ return [
                 'options' => [
                     'route'    => '/admin',
                     'defaults' =>[
-                        'controller' => 'Admin\Index',
+                        'controller' => 'Blog\Controller\Admin\IndexController',
                         'action'     => 'index',
                     ]
                 ]
@@ -32,7 +32,7 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            'Admin\Index' => 'Blog\Controller\Admin\IndexController'
+            'Blog\Controller\Admin\IndexController' => 'Blog\Controller\Admin\IndexController'
         ]
     ],
     'password_additional' => 'linfeiyang'
