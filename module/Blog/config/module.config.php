@@ -8,6 +8,36 @@
 return [
     'router' => [
         'routes' => [
+            'api' => [
+                'type' => 'literal',
+                'options' => [
+                    'route' => '/api'
+                ],
+                'child_routes' => [
+                    'taobao' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/taobao',
+                        ],
+                        'child_routes' => [
+                            'info' => [
+                                'type' => 'segment',
+                                'options' => [
+                                    'route'=> '/info/[:name]',
+                                    'defaults' => [
+                                        'controller' => 'Blog\Controller\Api\IndexController',
+                                        'action' => 'getTaobaoUserInfo'
+                                    ],
+                                    'constraints' => [
+                                        'name' => '[^\']+'
+                                    ]
+                                ]
+                            ]
+
+                        ]
+                    ]
+                ]
+            ],
             'home' => [
                 'type' => 'Literal',
                 'options' => [
@@ -32,7 +62,8 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            'Blog\Controller\Admin\IndexController' => 'Blog\Controller\Admin\IndexController'
+            'Blog\Controller\Admin\IndexController' => 'Blog\Controller\Admin\IndexController',
+            'Blog\Controller\Api\IndexController' => 'Blog\Controller\Api\IndexController'
         ]
     ],
     'password_additional' => 'linfeiyang'
