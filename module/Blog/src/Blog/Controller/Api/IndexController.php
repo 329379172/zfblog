@@ -56,6 +56,8 @@ class IndexController extends AbstractActionController{
             $info['sellerMonth'] = $document->find('.inq_04_001')[8]->find('b')[0]->text();
             $info['sellerHalfYear'] = $document->find('.inq_04_001')[9]->find('b')[0]->text();
             $info['sellerHalfYearAgo'] = $document->find('.inq_04_001')[10]->find('b')[0]->text();
+            $infojson = json_decode($taobaoInfoResponse->body,true);
+            $info['SecurityLevel'] = str_get_html(urldecode($infojson[0]['SecurityLevel']))->find('img')[0]->attr['src'];
             echo json_encode($info);
         }else{
             echo '';
