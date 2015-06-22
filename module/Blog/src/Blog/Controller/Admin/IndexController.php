@@ -19,5 +19,18 @@ class IndexController extends AbstractActionController{
 
     }
 
+    public function loginAction(){
+        $request = $this->getRequest();
+        if(!$request->isPost()){
+            $smarty  = $this->getServiceLocator()->get('Smarty');
+            $smarty->assign('error',null);
+            $smarty->display('admin/login.tpl');
+        }else{
+            $request->getQuery('name');
+            $request->getQuery('password');
+        }
+        exit;
+    }
+
 
 }
