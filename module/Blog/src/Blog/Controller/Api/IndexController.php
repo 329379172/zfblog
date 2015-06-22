@@ -43,7 +43,11 @@ class IndexController extends AbstractActionController{
             $info['chapingNumber'] = $document->find('#chapingNumber')[0]->text();
             $info['bili'] = $document->find('#zcbl')[0]->text();
             $info['buyerLevel'] = $document->find('.inq_04_001')[0]->find('img')[0]->attr['src'];
-            $info['buyerVipLevel'] = $document->find('.inq_04_001')[0]->find('a')[0]->find('img')[0]->attr['title'];
+
+            $dom = $document->find('.inq_04_001')[0]->find('a');
+            if(count($dom) > 0){
+                $info['buyerVipLevel'] = $document->find('.inq_04_001')[0]->find('a')[0]->find('img')[0]->attr['title'];
+            }
             $info['buyerCredit'] = $document->find('.inq_04_001')[0]->find('b[name=p]')[0]->text();
             $info['buyerWeek'] = $document->find('.inq_04_001')[1]->find('.qq')[0]->text();
             $info['buyerMonth'] = $document->find('.inq_04_001')[2]->find('.qq')[0]->text();
