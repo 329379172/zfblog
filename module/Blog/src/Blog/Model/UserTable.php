@@ -19,8 +19,6 @@ Class UserTable extends AdapterPluginManager{
     }
 
     public function findByName($name){
-        echo $name;
-
         $adapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $select = $this->tableGateway->getSql()->select();
         $select->where(['name'=>$name]);

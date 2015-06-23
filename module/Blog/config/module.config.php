@@ -31,30 +31,33 @@ return [
                                     'constraints' => [
                                         'name' => '[^\']+'
                                     ]
-                                ]
+                                ],
+                                'may_terminate' => true,
                             ]
 
                         ]
                     ]
                 ]
             ],
-            'home' => [
-                'type' => 'Literal',
+            'admin' => [
+                'type' => 'literal',
                 'options' => [
-                    'route'    => '/admin',
-                    'defaults' =>[
-                        'controller' => 'Blog\Controller\Admin\IndexController',
-                        'action'     => 'index',
-                    ]
-                ]
-            ],
-            'login' => [
-                'type' => 'Literal',
-                'options' => [
-                    'route' => '/admin/login',
+                    'route' => '/admin',
                     'defaults' => [
                         'controller' => 'Blog\Controller\Admin\IndexController',
-                        'action'    => 'login'
+                        'action'    => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'login' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/login',
+                            'defaults' => [
+                                'action' => 'login'
+                            ]
+                        ]
                     ]
                 ]
             ]

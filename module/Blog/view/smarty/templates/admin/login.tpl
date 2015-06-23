@@ -86,7 +86,7 @@
                         <label class="remember" for="remember"><input type="checkbox" id="remember"> Remember me</label>
                     </div>
                     <div class="clearfix"></div>
-
+                    <input type="hidden" name="test" value="sss">
                     <p class="center col-md-5">
                         <button type="submit" class="btn btn-primary">Login</button>
                     </p>

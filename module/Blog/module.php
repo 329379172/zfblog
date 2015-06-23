@@ -10,6 +10,7 @@ use Blog\Model\Article;
 use Blog\Model\ArticleTable;
 use Blog\Model\User;
 use Blog\Model\UserTable;
+use Zend\Cache\StorageFactory;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
@@ -84,6 +85,9 @@ class Module implements ConfigProviderInterface,AutoloaderProviderInterface,Serv
                     $smarty->setCompileDir(__DIR__ . '/view/smarty/templates_c');
                     $smarty->setCacheDir(__DIR__ . '/view/smarty/cache');
                     return $smarty;
+                },
+                'Redis' => function(ServiceLocatorInterface $sm){
+                    return StorageFactory::factory($sm->get('config')['Redis']);
                 }
             ]
         ];
