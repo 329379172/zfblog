@@ -7,12 +7,20 @@
  */
 namespace Api\Controller;
 include __DIR__ . '/../Plugin/simple_html_dom.php';
+use Zend\Cache\Storage\Adapter\Redis;
+use Zend\Cache\Storage\Adapter\RedisOptions;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController{
 
     function getTaobaoUserInfoAction(){
         $nick = urlencode($this->params('name'));
+        $redis = $this->getServiceLocator()->get('Redis');
+        //$redis = new Redis();
+        if($redis->getItem(md5($nick))){
+            echo $redis->getItem(md5($nick));
+            exit;
+        }
         $headers = [
             'Origin' => 'http://www.131458.com',
             'Referer' => 'http://www.131458.com/',
@@ -61,7 +69,9 @@ class IndexController extends AbstractActionController{
             $info['sellerHalfYearAgo'] = $document->find('.inq_04_001')[10]->find('b')[0]->text();
             $infojson = json_decode($taobaoInfoResponse->body,true);
             $info['SecurityLevel'] = str_get_html(urldecode($infojson[0]['SecurityLevel']))->find('img')[0]->attr['src'];
-            echo json_encode($info);
+            $ret  = json_encode($info);
+            echo $ret;
+            $redis->setItem(md5($nick),$ret);
         }else{
             echo '';
         }

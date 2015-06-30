@@ -10,8 +10,9 @@ namespace Api;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
 
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface,DependencyIndicatorInterface
 {
 
     /**
@@ -36,6 +37,10 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                 ]
             ]
         ];
+    }
+
+    public function getModuleDependencies(){
+        return ['Redis'];
     }
 
 
