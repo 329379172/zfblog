@@ -16,10 +16,8 @@ class IndexController extends AbstractActionController{
 
     public function indexAction(){
 
-        $redis = $this->getServiceLocator()->get('Redis');
-        $redis->setItem('foo','sss');
-        var_dump($redis->getItem('foo'));
-        echo 'hehe';
+        $smarty = $this->getServiceLocator()->get('Smarty');
+        $smarty->display('admin/index.tpl');
 
         exit;
 
@@ -62,12 +60,12 @@ class IndexController extends AbstractActionController{
                 }
             }
             if ($success) {
-                echo '登录成功';
+                $this->redirect()->toUrl('/admin');
             } else {
                 $smarty->assign('error', $error);
                 $smarty->display('admin/login.tpl');
             }
         }
-        exit;
+
     }
 }

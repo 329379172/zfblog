@@ -10,6 +10,7 @@ use Blog\Model\Article;
 use Blog\Model\ArticleTable;
 use Blog\Model\User;
 use Blog\Model\UserTable;
+use Blog\Plugin\MySmarty;
 use Zend\Cache\StorageFactory;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
@@ -76,7 +77,7 @@ class Module implements ConfigProviderInterface,AutoloaderProviderInterface,Serv
                     return new TableGateway('tbl_user',$dbAdapter,null,$resultSetPrototype);
                 },
                 'Smarty' => function(ServiceLocatorInterface $sm){
-                    $smarty = new \Smarty();
+                    $smarty = new MySmarty();
                     $smarty->debugging = false;
                     $smarty->caching = false;
                     $smarty->cache_lifetime = 120;

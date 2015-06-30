@@ -5,9 +5,8 @@
  * Date: 15/6/15
  * Time: 下午2:54
  */
-namespace Blog\Controller\Api;
-include 'simple_html_dom.php';
-use Zend\Debug\Debug;
+namespace Api\Controller;
+include __DIR__ . '/../Plugin/simple_html_dom.php';
 use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController{
@@ -33,7 +32,7 @@ class IndexController extends AbstractActionController{
             $url = 'http://www.131458.com/handler/TaobaoInfo.ashx?nickCode='  . $nick .  '&token=' . $tokenResponse->body . '&_=' . (time() * 1000);
             $taobaoInfoResponse2 = \Requests::get($url,$headers);
 
-            $document = \Api\Plugin\str_get_html($taobaoInfoResponse2->body);
+            $document = str_get_html($taobaoInfoResponse2->body);
             $info = [];
             $info['nickName'] = $document->find('.inq_02_L_001')[0]->find('a')[0]->text();
             $info['registerTime'] =  $document->find('.inq_02_L_002')[0]->find('span')[0]->text();
