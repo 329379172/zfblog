@@ -22,7 +22,6 @@ Class UserTable extends AdapterPluginManager{
         $adapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
         $select = $this->tableGateway->getSql()->select();
         $select->where(['name'=>$name]);
-        echo $select->getSqlString($adapter->getPlatform());
         $result = $this->tableGateway->selectWith($select);
         return $result;
     }

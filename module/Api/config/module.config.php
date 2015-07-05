@@ -30,6 +30,20 @@ return [
                             ]
 
                         ]
+                    ],
+                    'postcode' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/postcode/[:name]',
+                            'defaults' => [
+                                'controller' => 'Api\Controller\IndexController',
+                                'action' => 'getPostCode'
+                            ],
+                            'constraints' => [
+                                'name' => '[^\']+'
+                            ]
+                        ],
+                        'may_terminate' => true,
                     ]
                 ]
             ]

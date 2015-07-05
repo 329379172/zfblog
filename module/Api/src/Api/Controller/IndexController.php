@@ -78,7 +78,23 @@ class IndexController extends AbstractActionController{
         exit;
     }
 
+    public function getPostCodeAction(){
+        $query = urlencode(iconv('utf-8','gbk',$this->params('name')));
+        $response = \Requests::get('http://opendata.baidu.com/post/s?wd=' . $query . '&rn=20');
+        $document = str_get_html($response->body);
+        $listData = $document->find('.list-data ul li a');
+        if(count($listData) > 0){
+            $arr = explode(iconv('utf-8','gbk',' '),$listData[0]->text());
+            $ret = $arr[count($arr) - 1];
+            echo $ret;
+            exit;
+        }
 
-
-
+        $tableData = $document->find('.table-data .table-list tbody tr');
+        if(count($tableData) > 1){
+            echo $tableData[1]->find('td')[0]->text();
+            exit;
+        }
+        exit;
+    }
 }
