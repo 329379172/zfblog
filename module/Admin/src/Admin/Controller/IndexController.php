@@ -5,7 +5,7 @@
  * Date: 15/6/15
  * Time: 下午2:54
  */
-namespace Blog\Controller\Admin;
+namespace Admin\Controller;
 
 use Zend\Cache\Storage\Adapter\Session;
 use Zend\Mvc\Controller\AbstractActionController;

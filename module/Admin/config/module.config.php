@@ -1,7 +1,35 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xiaoqiu
- * Date: 15/7/6
- * Time: 下午2:43
- */
+return [
+    'router' => [
+        'routes' => [
+            'admin' => [
+                'type' => 'literal',
+                'options' => [
+                    'route' => '/admin',
+                    'defaults' => [
+                        'controller' => 'Admin\Controller\IndexController',
+                        'action'    => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'login' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/login',
+                            'defaults' => [
+                                'action' => 'login'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
+    'controllers' => [
+        'invokables' => [
+            'Admin\Controller\IndexController' => 'Admin\Controller\IndexController',
+        ]
+    ],
+    'password_additional' => 'linfeiyang'
+];

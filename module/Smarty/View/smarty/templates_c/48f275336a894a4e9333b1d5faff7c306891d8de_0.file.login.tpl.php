@@ -1,3 +1,33 @@
+<?php /* Smarty version 3.1.25, created on 2015-07-06 14:58:38
+         compiled from "/Users/xiaoqiu/Documents/zfblog/ZendSkeletonApplication/module/Smarty/view/smarty/templates/admin/login.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:113747763559a271e927687_07470759%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '48f275336a894a4e9333b1d5faff7c306891d8de' => 
+    array (
+      0 => '/Users/xiaoqiu/Documents/zfblog/ZendSkeletonApplication/module/Smarty/view/smarty/templates/admin/login.tpl',
+      1 => 1436165782,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '113747763559a271e927687_07470759',
+  'variables' => 
+  array (
+    'error' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => '3.1.25',
+  'unifunc' => 'content_559a271ea08fd2_26574648',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_559a271ea08fd2_26574648')) {
+function content_559a271ea08fd2_26574648 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '113747763559a271e927687_07470759';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,11 +70,15 @@
     <link href='/css/animate.min.css' rel='stylesheet'>
 
     <!-- jQuery -->
-    <script src="/bower_components/jquery/jquery.min.js"></script>
+    <?php echo '<script'; ?>
+ src="/bower_components/jquery/jquery.min.js"><?php echo '</script'; ?>
+>
 
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <?php echo '<script'; ?>
+ src="http://html5shim.googlecode.com/svn/trunk/html5.js"><?php echo '</script'; ?>
+>
     <![endif]-->
 
     <!-- The fav icon -->
@@ -92,12 +126,13 @@
                     </p>
                 </fieldset>
             </form>
-            {if $error}
+            <?php if ($_smarty_tpl->tpl_vars['error']->value) {?>
             <div class="alert alert-danger">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>Error!</strong> {$error}
+                <strong>Error!</strong> <?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+
             </div>
-            {/if}
+            <?php }?>
         </div>
         <!--/span-->
     </div><!--/row-->
@@ -107,39 +142,74 @@
 
 <!-- external javascript -->
 
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<?php echo '<script'; ?>
+ src="/bower_components/bootstrap/dist/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
 
 <!-- library for cookie management -->
-<script src="/js/jquery.cookie.js"></script>
+<?php echo '<script'; ?>
+ src="/js/jquery.cookie.js"><?php echo '</script'; ?>
+>
 <!-- calender plugin -->
-<script src='/bower_components/moment/min/moment.min.js'></script>
-<script src='/bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+<?php echo '<script'; ?>
+ src='/bower_components/moment/min/moment.min.js'><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src='/bower_components/fullcalendar/dist/fullcalendar.min.js'><?php echo '</script'; ?>
+>
 <!-- data table plugin -->
-<script src='/js/jquery.dataTables.min.js'></script>
+<?php echo '<script'; ?>
+ src='/js/jquery.dataTables.min.js'><?php echo '</script'; ?>
+>
 
 <!-- select or dropdown enhancer -->
-<script src="/bower_components/chosen/chosen.jquery.min.js"></script>
+<?php echo '<script'; ?>
+ src="/bower_components/chosen/chosen.jquery.min.js"><?php echo '</script'; ?>
+>
 <!-- plugin for gallery image view -->
-<script src="/bower_components/colorbox/jquery.colorbox-min.js"></script>
+<?php echo '<script'; ?>
+ src="/bower_components/colorbox/jquery.colorbox-min.js"><?php echo '</script'; ?>
+>
 <!-- notification plugin -->
-<script src="/js/jquery.noty.js"></script>
+<?php echo '<script'; ?>
+ src="/js/jquery.noty.js"><?php echo '</script'; ?>
+>
 <!-- library for making tables responsive -->
-<script src="/bower_components/responsive-tables/responsive-tables.js"></script>
+<?php echo '<script'; ?>
+ src="/bower_components/responsive-tables/responsive-tables.js"><?php echo '</script'; ?>
+>
 <!-- tour plugin -->
-<script src="/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+<?php echo '<script'; ?>
+ src="/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"><?php echo '</script'; ?>
+>
 <!-- star rating plugin -->
-<script src="/js/jquery.raty.min.js"></script>
+<?php echo '<script'; ?>
+ src="/js/jquery.raty.min.js"><?php echo '</script'; ?>
+>
 <!-- for iOS style toggle switch -->
-<script src="/js/jquery.iphone.toggle.js"></script>
+<?php echo '<script'; ?>
+ src="/js/jquery.iphone.toggle.js"><?php echo '</script'; ?>
+>
 <!-- autogrowing textarea plugin -->
-<script src="/js/jquery.autogrow-textarea.js"></script>
+<?php echo '<script'; ?>
+ src="/js/jquery.autogrow-textarea.js"><?php echo '</script'; ?>
+>
 <!-- multiple file upload plugin -->
-<script src="/js/jquery.uploadify-3.1.min.js"></script>
+<?php echo '<script'; ?>
+ src="/js/jquery.uploadify-3.1.min.js"><?php echo '</script'; ?>
+>
 <!-- history.js for cross-browser state change on ajax -->
-<script src="/js/jquery.history.js"></script>
+<?php echo '<script'; ?>
+ src="/js/jquery.history.js"><?php echo '</script'; ?>
+>
 <!-- application script for Charisma demo -->
-<script src="/js/charisma.js"></script>
+<?php echo '<script'; ?>
+ src="/js/charisma.js"><?php echo '</script'; ?>
+>
 
 
 </body>
 </html>
+<?php }
+}
+?>
