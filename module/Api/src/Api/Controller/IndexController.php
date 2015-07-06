@@ -79,7 +79,7 @@ class IndexController extends AbstractActionController{
     }
 
     public function getPostCodeAction(){
-        $query = $this->params('name');
+        $query = urlencode($this->params('name'));
         $response = \Requests::get('http://opendata.baidu.com/post/s?wd=' . $query . '&rn=20');
         $document = str_get_html($response->body);
         $listData = $document->find('.list-data ul li a');
