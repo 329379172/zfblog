@@ -44,6 +44,34 @@ return [
                             ]
                         ],
                         'may_terminate' => true,
+                    ],
+                    'place' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/place/[:name]',
+                            'defaults' => [
+                                'controller' => 'Api\Controller\IndexController',
+                                'action' => 'getPlace'
+                            ],
+                            'constraints' => [
+                                'name' => '[^\']+'
+                            ]
+                        ],
+                        'may_terminate' => true,
+                    ],
+                    'randomPlace' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/randomPlace/[:limit]',
+                            'defaults' => [
+                                'controller' => 'Api\Controller\IndexController',
+                                'action' => 'getRandomPlace'
+                            ],
+                            'constraints' => [
+                                'limit' => '\d+'
+                            ]
+                        ],
+                        'may_terminate' => true,
                     ]
                 ]
             ]

@@ -93,7 +93,7 @@ class IndexController extends AbstractActionController
             $text = $listData[0]->text();
             $arr = explode(iconv('utf-8', 'gbk', ' '), $text);
             $index = $arr[count($arr) - 1];
-            echo json_encode([$index=> iconv('gbk', 'utf-8',$arr[1])],JSON_UNESCAPED_UNICODE);
+            echo json_encode([$index => iconv('gbk', 'utf-8', $arr[1])], JSON_UNESCAPED_UNICODE);
             exit;
         }
 
@@ -104,9 +104,76 @@ class IndexController extends AbstractActionController
                 $index = $tableData[$i]->find('td')[0]->text();
                 $retArr[$index] = iconv('gbk', 'utf-8', $tableData[$i]->find('td')[1]->text());
             }
-            echo json_encode($retArr,JSON_UNESCAPED_UNICODE);
+            echo json_encode($retArr, JSON_UNESCAPED_UNICODE);
             exit;
         }
+        exit;
+    }
+
+    public function getPlaceAction()
+    {
+        $query = urlencode(iconv('utf-8', 'gbk', $this->params('name')));
+        $data = [
+            'newmap' => 1,
+            'reqflag' => 'pcmap',
+            'biz' => 1,
+            'from' => 'webmap',
+            'da_par' => 'baidu',
+            'pcevaname' => 'pc3',
+            'qt' => 's',
+            'da_src' => 'searchBox.button',
+            'wd' => $query,
+            'c' => 131,
+            'src' => 0,
+            'wd2' => '',
+            'sug' => 0,
+            'l' => 19,
+            'b' => '',
+            'from' => 'webmap',
+            'force' => 'newsample',
+            'sug_forward' => '',
+            'tn' => 'B_NORMAL_MAP',
+            'nn' => '0',
+            'ie' => 'utf-8',
+            't' => time() * 1000
+        ];
+        $params = [];
+        foreach ($data as $key => $val) {
+            $params[] = $key . '=' . $val;
+        }
+        $url = 'http://map.baidu.com/?' . join('&', $params);
+        $response = \Requests::get($url);
+
+        $resData = json_decode($response->body, true);
+        $ret = [];
+        if (is_array($resData)) {
+            if (is_array($resData['content'])) {
+                $ret[] = '当前城市:' . $resData['current_city']['up_province_name'] . '-' . $resData['current_city']['name'];
+                foreach ($resData['content'] as $key => $val) {
+                    $ret[] = $val['name'] . '---' . $val['addr'];
+                }
+                echo join("\r\n", $ret);
+                exit;
+            }
+        }
+        echo 'error';
+        exit;
+    }
+
+    public function getRandomPlaceAction()
+    {
+        $limit = $this->params('limit');
+        if (empty($limit)) {
+            $limit = 10;
+        }
+        $communityTable = $this->getServiceLocator()->get('CommunityTable');
+        $result = $communityTable->getRandom($limit);
+        $ret = [];
+        while ($row = $result->current()) {
+            $ret[] = $row->getName() . '---' . $row->getAddr();
+            $result->next();
+        }
+        echo join("\r\n", $ret);
         exit;
     }
 }
