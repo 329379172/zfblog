@@ -9,6 +9,7 @@ namespace Api\Controller;
 include __DIR__ . '/../Plugin/simple_html_dom.php';
 use Zend\Cache\Storage\Adapter\Redis;
 use Zend\Cache\Storage\Adapter\RedisOptions;
+use Zend\Http\Header\UserAgent;
 use Zend\Mvc\Controller\AbstractActionController;
 
 ini_set("display_errors", "On");
@@ -19,6 +20,9 @@ class IndexController extends AbstractActionController
 
     function getTaobaoUserInfoAction()
     {
+        $log = $this->getServiceLocator()->get('log');
+        $log->addInfo('取淘宝信息'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+
         $nick = urlencode($this->params('name'));
         $redis = $this->getServiceLocator()->get('Redis');
         //$redis = new Redis();
@@ -85,6 +89,9 @@ class IndexController extends AbstractActionController
 
     public function getPostCodeAction()
     {
+        $log = $this->getServiceLocator()->get('log');
+        $log->addInfo('取邮编'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+
         $query = urlencode(iconv('utf-8', 'gbk', $this->params('name')));
         $response = \Requests::get('http://opendata.baidu.com/post/s?wd=' . $query . '&rn=20');
         $document = str_get_html($response->body);
@@ -112,6 +119,10 @@ class IndexController extends AbstractActionController
 
     public function getPlaceAction()
     {
+
+        $log = $this->getServiceLocator()->get('log');
+        $log->addInfo('搜索小区'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+
         $query = urlencode(iconv('utf-8', 'gbk', $this->params('name')));
         $data = [
             'newmap' => 1,
@@ -174,6 +185,8 @@ class IndexController extends AbstractActionController
             $result->next();
         }
         echo join("\r\n", $ret);
+        $log = $this->getServiceLocator()->get('log');
+        $log->addInfo('随机取小区'.$limit.'个' . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
         exit;
     }
 }
