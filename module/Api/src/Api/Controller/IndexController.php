@@ -198,7 +198,7 @@ class IndexController extends AbstractActionController
                 //print_r($_GET);
                 $query = $this->getRequest()->getQuery()->toArray();
                 echo $db->add($query);
-                $log->addInfo('添加放单信息' . json_decode($query) . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+                $log->addInfo('添加放单信息' . json_encode($query) . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
                 break;
             case 'select':
                 $ret = $db->select();
@@ -224,7 +224,7 @@ class IndexController extends AbstractActionController
                 break;
             case 'save':
                 $query = $this->getRequest()->getQuery()->toArray();
-                $log->addInfo('保存放单信息,id:' . json_encode($quey) . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+                $log->addInfo('保存放单信息,id:' . json_encode($query) . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
                 if(intval($query['id'])){
                     $query['id'] = intval($query['id']);
                     echo $db->save($query);
