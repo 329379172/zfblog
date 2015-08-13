@@ -190,6 +190,7 @@ class IndexController extends AbstractActionController
     }
 
     public function releaseOrderAction(){
+        $log = $this->getServiceLocator()->get('log');
         $action = $this->params('act');
         $db = $this->getServiceLocator()->get('ReleaseOrderTable');
         switch($action){
@@ -197,6 +198,7 @@ class IndexController extends AbstractActionController
                 //print_r($_GET);
                 $query = $this->getRequest()->getQuery()->toArray();
                 echo $db->add($query);
+                $log->addInfo('添加放单信息' . json_decode($query) . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
                 break;
             case 'select':
                 $ret = $db->select();
@@ -209,9 +211,11 @@ class IndexController extends AbstractActionController
                     $orders[] = $tmp;
                 }
                 echo json_encode($orders);
+                $log->addInfo('查询放单信息' . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
                 break;
             case 'delete':
                 $id = intval($this->getRequest()->getQuery('id'));
+                $log->addInfo('删除放单信息,id:' . $id . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
                 if($id){
                     echo $db->del($id);
                 }else{
@@ -220,6 +224,7 @@ class IndexController extends AbstractActionController
                 break;
             case 'save':
                 $query = $this->getRequest()->getQuery()->toArray();
+                $log->addInfo('保存放单信息,id:' . json_encode($quey) . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
                 if(intval($query['id'])){
                     $query['id'] = intval($query['id']);
                     echo $db->save($query);
