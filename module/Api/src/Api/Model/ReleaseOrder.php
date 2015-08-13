@@ -11,60 +11,27 @@ class ReleaseOrder{
 
     protected $id;
 
-    protected $qt;
+    protected $qtnc;
 
-    protected $tb;
+    protected $tbnc;
 
     protected $ip;
 
     protected $qq;
 
-    protected $level;
+    protected $benjin;
 
-    protected $createTime;
+    protected $yongjin;
 
+    protected $lian;
 
-    public function exchangeArray($data){
-        $this->id = (!empty($data['id'])) ? $data['id'] : null;
-        $this->qt = (!empty($data['qt'])) ? $data['qt'] : null;
-        $this->tb = (!empty($data['tb'])) ? $data['tb'] : null;
-        $this->ip = (!empty($data['ip'])) ? $data['ip'] : null;
-        $this->qq = (!empty($data['qq'])) ? $data['qq'] : null;
-        $this->level = (!empty($data['level'])) ? $data['level'] : null;
-        $this->createTime = (!empty($data['createTime'])) ? $data['createTime'] : null;
-    }
-
-    public function toArray(){
-        return [
-            'id' => (!empty($this->id)) ? $this->id : null,
-            'qt' => (!empty($this->qt)) ? $this->qt : null,
-            'tb' => (!empty($this->tb)) ? $this->tb : null,
-            'ip' => (!empty($this->ip)) ? $this->ip : null,
-            'qq' => (!empty($this->qq)) ? $this->qq : null,
-            'level' => (!empty($this->level)) ? $this->level : null,
-            'createTime' => (!empty($this->createTime)) ? $this->createTime : null,
-        ];
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFree()
-    {
-        return $this->free;
-    }
-
-    /**
-     * @param mixed $free
-     */
-    public function setFree($free)
-    {
-        $this->free = $free;
-    }
+    protected $createTIme;
 
     protected $pay;
 
     protected $free;
+
+    protected $bianhao;
 
     /**
      * @return mixed
@@ -85,33 +52,33 @@ class ReleaseOrder{
     /**
      * @return mixed
      */
-    public function getQt()
+    public function getQtnc()
     {
-        return $this->qt;
+        return $this->qtnc;
     }
 
     /**
-     * @param mixed $qt
+     * @param mixed $qtnc
      */
-    public function setQt($qt)
+    public function setQtnc($qtnc)
     {
-        $this->qt = $qt;
+        $this->qtnc = $qtnc;
     }
 
     /**
      * @return mixed
      */
-    public function getTb()
+    public function getTbnc()
     {
-        return $this->tb;
+        return $this->tbnc;
     }
 
     /**
-     * @param mixed $tb
+     * @param mixed $tbnc
      */
-    public function setTb($tb)
+    public function setTbnc($tbnc)
     {
-        $this->tb = $tb;
+        $this->tbnc = $tbnc;
     }
 
     /**
@@ -149,33 +116,65 @@ class ReleaseOrder{
     /**
      * @return mixed
      */
-    public function getLevel()
+    public function getBenjin()
     {
-        return $this->level;
+        return $this->benjin;
     }
 
     /**
-     * @param mixed $level
+     * @param mixed $benjin
      */
-    public function setLevel($level)
+    public function setBenjin($benjin)
     {
-        $this->level = $level;
+        $this->benjin = $benjin;
     }
 
     /**
      * @return mixed
      */
-    public function getCreateTime()
+    public function getYongjin()
     {
-        return $this->createTime;
+        return $this->yongjin;
     }
 
     /**
-     * @param mixed $createTime
+     * @param mixed $yongjin
      */
-    public function setCreateTime($createTime)
+    public function setYongjin($yongjin)
     {
-        $this->createTime = $createTime;
+        $this->yongjin = $yongjin;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLian()
+    {
+        return $this->lian;
+    }
+
+    /**
+     * @param mixed $lian
+     */
+    public function setLian($lian)
+    {
+        $this->lian = $lian;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreateTIme()
+    {
+        return $this->createTIme;
+    }
+
+    /**
+     * @param mixed $createTIme
+     */
+    public function setCreateTIme($createTIme)
+    {
+        $this->createTIme = $createTIme;
     }
 
     /**
@@ -194,6 +193,69 @@ class ReleaseOrder{
         $this->pay = $pay;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getFree()
+    {
+        return $this->free;
+    }
 
+    /**
+     * @param mixed $free
+     */
+    public function setFree($free)
+    {
+        $this->free = $free;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBianhao()
+    {
+        return $this->bianhao;
+    }
+
+    /**
+     * @param mixed $bianhao
+     */
+    public function setBianhao($bianhao)
+    {
+        $this->bianhao = $bianhao;
+    }
+
+
+    public function exchangeArray($data){
+        $this->id = (!empty($data['id'])) ? $data['id'] : null;
+        $this->qtnc = (!empty($data['qtnc'])) ? $data['qtnc'] : null;
+        $this->tbnc = (!empty($data['tbnc'])) ? $data['tbnc'] : null;
+        $this->ip = (!empty($data['ip'])) ? $data['ip'] : null;
+        $this->qq = (!empty($data['qq'])) ? $data['qq'] : null;
+        $this->benjin = (!empty($data['benjin'])) ? $data['benjin'] : null;
+        $this->yongjin = (!empty($data['yongjin'])) ? $data['yongjin'] : null;
+        $this->lian = (!empty($data['lian'])) ? $data['lian'] : null;
+        $this->pay = (!empty($data['pay'])) ? $data['pay'] : null;
+        $this->free = (!empty($data['free'])) ? $data['free'] : null;
+        $this->bianhao = (!empty($data['bianhao'])) ? $data['bianhao'] : null;
+        $this->createTime = (!empty($data['createTime'])) ? $data['createTime'] : null;
+    }
+
+    public function toArray(){
+        return [
+            'id' => (!empty($this->id)) ? $this->id : null,
+            'qtnc' => (!empty($this->qtnc)) ? $this->qtnc : null,
+            'tbnc' => (!empty($this->tbnc)) ? $this->tbnc : null,
+            'ip' => (!empty($this->ip)) ? $this->ip : null,
+            'qq' => (!empty($this->qq)) ? $this->qq : null,
+            'benjin' => (!empty($this->benjin)) ? $this->benjin : null,
+            'yongjin' => (!empty($this->yongjin)) ? $this->yongjin : null,
+            'lian' => (!empty($this->lian)) ? $this->lian : null,
+            'pay' => (!empty($this->pay)) ? $this->pay : null,
+            'free' => (!empty($this->free)) ? $this->free : null,
+            'bianhao' => (!empty($this->bianhao)) ? $this->bianhao : null,
+            'createTime' => (!empty($this->createTime)) ? $this->createTime : null,
+        ];
+    }
 
 }
