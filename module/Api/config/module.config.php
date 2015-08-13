@@ -72,6 +72,20 @@ return [
                             ]
                         ],
                         'may_terminate' => true,
+                    ],
+                    'releaseOrder' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/release/[:act]',
+                            'defaults' => [
+                                'controller' => 'Api\Controller\IndexController',
+                                'action' => 'releaseOrder'
+                            ],
+                            'constraints' => [
+                                'act' => '[^\']+'
+                            ]
+                        ],
+                        'may_terminate' => true,
                     ]
                 ]
             ]

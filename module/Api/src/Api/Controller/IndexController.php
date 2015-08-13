@@ -12,8 +12,7 @@ use Zend\Cache\Storage\Adapter\RedisOptions;
 use Zend\Http\Header\UserAgent;
 use Zend\Mvc\Controller\AbstractActionController;
 
-ini_set("display_errors", "On");
-error_reporting(E_ALL | E_STRICT);
+
 
 class IndexController extends AbstractActionController
 {
@@ -188,5 +187,48 @@ class IndexController extends AbstractActionController
         $log = $this->getServiceLocator()->get('log');
         $log->addInfo('随机取小区'.$limit.'个' . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
         exit;
+    }
+
+    public function releaseOrderAction(){
+        $action = $this->params('act');
+        $db = $this->getServiceLocator()->get('ReleaseOrderTable');
+        switch($action){
+            case 'add':
+                //print_r($_GET);
+                $query = $this->getRequest()->getQuery()->toArray();
+                echo $db->add($query);
+                break;
+            case 'select':
+                $ret = $db->select();
+                $orders = [];
+                foreach($ret as $key => $val){
+                    $tmp = $val->toArray();
+                    if($tmp['createTime']){
+                        $tmp['createTime'] = date('Y-m-d H:i:s', $tmp['createTime']);
+                    }
+                    $orders[] = $tmp;
+                }
+                echo json_encode($orders);
+                break;
+            case 'delete':
+                $id = intval($this->getRequest()->getQuery('id'));
+                if($id){
+                    echo $db->del($id);
+                }else{
+                    echo -1;
+                }
+                break;
+            case 'save':
+                $query = $this->getRequest()->getQuery()->toArray();
+                if(intval($query['id'])){
+                    $query['id'] = intval($query['id']);
+                    echo $db->save($query);
+                }else{
+                    echo -1;
+                }
+                break;
+        }
+        exit;
+
     }
 }
