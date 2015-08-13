@@ -9,16 +9,19 @@ namespace Api\Controller;
 include __DIR__ . '/../Plugin/simple_html_dom.php';
 use Zend\Cache\Storage\Adapter\Redis;
 use Zend\Cache\Storage\Adapter\RedisOptions;
+use Zend\Http\Header\UserAgent;
 use Zend\Mvc\Controller\AbstractActionController;
 
-ini_set("display_errors", "On");
-error_reporting(E_ALL | E_STRICT);
+
 
 class IndexController extends AbstractActionController
 {
 
     function getTaobaoUserInfoAction()
     {
+        $log = $this->getServiceLocator()->get('log');
+        $log->addInfo('取淘宝信息'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+
         $nick = urlencode($this->params('name'));
         $redis = $this->getServiceLocator()->get('Redis');
         //$redis = new Redis();
@@ -85,6 +88,9 @@ class IndexController extends AbstractActionController
 
     public function getPostCodeAction()
     {
+        $log = $this->getServiceLocator()->get('log');
+        $log->addInfo('取邮编'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+
         $query = urlencode(iconv('utf-8', 'gbk', $this->params('name')));
         $response = \Requests::get('http://opendata.baidu.com/post/s?wd=' . $query . '&rn=20');
         $document = str_get_html($response->body);
@@ -93,7 +99,7 @@ class IndexController extends AbstractActionController
             $text = $listData[0]->text();
             $arr = explode(iconv('utf-8', 'gbk', ' '), $text);
             $index = $arr[count($arr) - 1];
-            echo json_encode([$index=> iconv('gbk', 'utf-8',$arr[1])],JSON_UNESCAPED_UNICODE);
+            echo json_encode([$index => iconv('gbk', 'utf-8', $arr[1])], JSON_UNESCAPED_UNICODE);
             exit;
         }
 
@@ -104,9 +110,130 @@ class IndexController extends AbstractActionController
                 $index = $tableData[$i]->find('td')[0]->text();
                 $retArr[$index] = iconv('gbk', 'utf-8', $tableData[$i]->find('td')[1]->text());
             }
-            echo json_encode($retArr,JSON_UNESCAPED_UNICODE);
+            echo json_encode($retArr, JSON_UNESCAPED_UNICODE);
             exit;
         }
         exit;
+    }
+
+    public function getPlaceAction()
+    {
+
+        $log = $this->getServiceLocator()->get('log');
+        $log->addInfo('搜索小区'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+
+        $query = urlencode(iconv('utf-8', 'gbk', $this->params('name')));
+        $data = [
+            'newmap' => 1,
+            'reqflag' => 'pcmap',
+            'biz' => 1,
+            'from' => 'webmap',
+            'da_par' => 'baidu',
+            'pcevaname' => 'pc3',
+            'qt' => 's',
+            'da_src' => 'searchBox.button',
+            'wd' => $query,
+            'c' => 131,
+            'src' => 0,
+            'wd2' => '',
+            'sug' => 0,
+            'l' => 19,
+            'b' => '',
+            'from' => 'webmap',
+            'force' => 'newsample',
+            'sug_forward' => '',
+            'tn' => 'B_NORMAL_MAP',
+            'nn' => '0',
+            'ie' => 'utf-8',
+            't' => time() * 1000
+        ];
+        $params = [];
+        foreach ($data as $key => $val) {
+            $params[] = $key . '=' . $val;
+        }
+        $url = 'http://map.baidu.com/?' . join('&', $params);
+        $response = \Requests::get($url);
+
+        $resData = json_decode($response->body, true);
+        $ret = [];
+        if (is_array($resData)) {
+            if (is_array($resData['content'])) {
+                $ret[] = '当前城市:' . $resData['current_city']['up_province_name'] . '-' . $resData['current_city']['name'];
+                foreach ($resData['content'] as $key => $val) {
+                    $ret[] = $val['name'] . '---' . $val['addr'];
+                }
+                echo join("\r\n", $ret);
+                exit;
+            }
+        }
+        echo 'error';
+        exit;
+    }
+
+    public function getRandomPlaceAction()
+    {
+        $limit = $this->params('limit');
+        if (empty($limit)) {
+            $limit = 10;
+        }
+        $communityTable = $this->getServiceLocator()->get('CommunityTable');
+        $result = $communityTable->getRandom($limit);
+        $ret = [];
+        while ($row = $result->current()) {
+            $ret[] = $row->getName() . '---' . $row->getAddr();
+            $result->next();
+        }
+        echo join("\r\n", $ret);
+        $log = $this->getServiceLocator()->get('log');
+        $log->addInfo('随机取小区'.$limit.'个' . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+        exit;
+    }
+
+    public function releaseOrderAction(){
+        $log = $this->getServiceLocator()->get('log');
+        $action = $this->params('act');
+        $db = $this->getServiceLocator()->get('ReleaseOrderTable');
+        switch($action){
+            case 'add':
+                //print_r($_GET);
+                $query = $this->getRequest()->getQuery()->toArray();
+                echo $db->add($query);
+                $log->addInfo('添加放单信息' . json_encode($query) . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+                break;
+            case 'select':
+                $ret = $db->select();
+                $orders = [];
+                foreach($ret as $key => $val){
+                    $tmp = $val->toArray();
+                    if($tmp['createTime']){
+                        $tmp['createTime'] = date('Y-m-d H:i:s', $tmp['createTime']);
+                    }
+                    $orders[] = $tmp;
+                }
+                echo json_encode($orders);
+                $log->addInfo('查询放单信息' . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+                break;
+            case 'delete':
+                $id = intval($this->getRequest()->getQuery('id'));
+                $log->addInfo('删除放单信息,id:' . $id . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+                if($id){
+                    echo $db->del($id);
+                }else{
+                    echo -1;
+                }
+                break;
+            case 'save':
+                $query = $this->getRequest()->getQuery()->toArray();
+                $log->addInfo('保存放单信息,id:' . json_encode($query) . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+                if(intval($query['id'])){
+                    $query['id'] = intval($query['id']);
+                    echo $db->save($query);
+                }else{
+                    echo -1;
+                }
+                break;
+        }
+        exit;
+
     }
 }
