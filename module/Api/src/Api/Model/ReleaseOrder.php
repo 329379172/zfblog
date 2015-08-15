@@ -33,6 +33,24 @@ class ReleaseOrder{
 
     protected $bianhao;
 
+    protected $ordertime;
+
+    /**
+     * @return mixed
+     */
+    public function getOrdertime()
+    {
+        return $this->ordertime;
+    }
+
+    /**
+     * @param mixed $ordertime
+     */
+    public function setOrdertime($ordertime)
+    {
+        $this->ordertime = $ordertime;
+    }
+
     /**
      * @return mixed
      */
@@ -239,6 +257,7 @@ class ReleaseOrder{
         $this->free = (!empty($data['free'])) ? $data['free'] : null;
         $this->bianhao = (!empty($data['bianhao'])) ? $data['bianhao'] : null;
         $this->createTime = (!empty($data['createTime'])) ? $data['createTime'] : null;
+        $this->ordertime = (!empty($data['ordertime'])) ? $data['ordertime'] : null;
     }
 
     public function toArray(){
@@ -255,6 +274,7 @@ class ReleaseOrder{
             'free' => (!empty($this->free)) ? $this->free : null,
             'bianhao' => (!empty($this->bianhao)) ? $this->bianhao : null,
             'createTime' => (!empty($this->createTime)) ? $this->createTime : null,
+            'ordertime' => (!empty($this->ordertime)) ? $this->ordertime : null,
         ];
     }
 
