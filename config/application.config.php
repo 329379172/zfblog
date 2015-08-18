@@ -11,6 +11,7 @@ return array(
         'Logs',
         'Smarty',
         'Redis',
+        'DbManager',
         'Application',
         'Api',
         'Admin'
