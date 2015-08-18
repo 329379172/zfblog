@@ -39,7 +39,7 @@ class IndexController extends AbstractActionController
         $d = json_decode($response->body, true);
         $session = $response->cookies['ASP.NET_SessionId']->value;
         if (is_array($d) && !empty($d['d'])) {
-            $tokenResponse = \Requests::get('http://localhost:3000/token?d=' . $d['d'] . '&c=vvl');
+            $tokenResponse = \Requests::get('http://123.57.144.6:3000/token?d=' . $d['d'] . '&c=vvl');
             $headers = [
                 'Cookie' => 'ASP.NET_SessionId=' . $session
             ];
