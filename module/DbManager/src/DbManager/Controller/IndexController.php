@@ -41,8 +41,8 @@ class IndexController extends AbstractActionController
         $body->addPart($part);
         $body->addPart($part2);
         $newmessage = new \Zend\Mail\Message();
-        $newmessage->addTo($this->getServiceLocator()->get('config')['mail']['to']);
-        $newmessage->addFrom($this->getServiceLocator()->get('config')['mail']['from']);
+        $newmessage->addTo($this->getServiceLocator()->get('config')['mailTo']);
+        $newmessage->addFrom($this->getServiceLocator()->get('config')['mailfrom']);
         $newmessage->setBody($body);
         $newmessage->setSubject('备份数据');
 

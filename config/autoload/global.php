@@ -48,8 +48,8 @@ return [
         'connection_config' => [
             'username' => '',
             'password' => ''
-        ],
-        'to' => '',
-        'from' => ''
-    ]
+        ]
+    ],
+    'mailTo' => '',
+    'mailFrom' => ''
 ];
