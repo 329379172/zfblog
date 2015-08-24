@@ -12,13 +12,14 @@ use Zend\Cache\Storage\Adapter\RedisOptions;
 use Zend\Http\Header\UserAgent;
 use Zend\Mvc\Controller\AbstractActionController;
 
-
-
 class IndexController extends AbstractActionController
 {
 
     function getTaobaoUserInfoAction()
     {
+        if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
+            echo "";
+        }
         $log = $this->getServiceLocator()->get('log');
         $log->addInfo('取淘宝信息'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
 
@@ -88,6 +89,9 @@ class IndexController extends AbstractActionController
 
     public function getPostCodeAction()
     {
+        if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
+            echo "";
+        }
         $log = $this->getServiceLocator()->get('log');
         $log->addInfo('取邮编'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
 
@@ -118,7 +122,9 @@ class IndexController extends AbstractActionController
 
     public function getPlaceAction()
     {
-
+        if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
+            echo "";
+        }
         $log = $this->getServiceLocator()->get('log');
         $log->addInfo('搜索小区'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
 
@@ -172,6 +178,9 @@ class IndexController extends AbstractActionController
 
     public function getRandomPlaceAction()
     {
+        if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
+            echo "";
+        }
         $limit = $this->params('limit');
         if (empty($limit)) {
             $limit = 10;
