@@ -19,6 +19,7 @@ class IndexController extends AbstractActionController
     {
         if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
             echo "";
+            exit;
         }
         $log = $this->getServiceLocator()->get('log');
         $log->addInfo('取淘宝信息'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
@@ -91,6 +92,7 @@ class IndexController extends AbstractActionController
     {
         if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
             echo "";
+            exit;
         }
         $log = $this->getServiceLocator()->get('log');
         $log->addInfo('取邮编'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
@@ -124,6 +126,7 @@ class IndexController extends AbstractActionController
     {
         if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
             echo "";
+            exit;
         }
         $log = $this->getServiceLocator()->get('log');
         $log->addInfo('搜索小区'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
@@ -180,6 +183,7 @@ class IndexController extends AbstractActionController
     {
         if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
             echo "";
+            exit;
         }
         $limit = $this->params('limit');
         if (empty($limit)) {
@@ -199,6 +203,10 @@ class IndexController extends AbstractActionController
     }
 
     public function releaseOrderAction(){
+        if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
+            echo "";
+            exit;
+        }
         $log = $this->getServiceLocator()->get('log');
         $action = $this->params('act');
         $db = $this->getServiceLocator()->get('ReleaseOrderTable');
