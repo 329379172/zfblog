@@ -47,7 +47,10 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,Dep
     }
 
     public function getModuleDependencies(){
-        return ['Redis'];
+        return [
+            'Redis',
+            'Base'
+        ];
     }
 
 
