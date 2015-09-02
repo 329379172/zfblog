@@ -21,6 +21,15 @@ return [
                                 'action' => 'login'
                             ]
                         ]
+                    ],
+                    'test' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/test',
+                            'defaults' => [
+                                'action' => 'test'
+                            ]
+                        ]
                     ]
                 ]
             ]
