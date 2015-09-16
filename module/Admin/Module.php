@@ -50,7 +50,7 @@ class Module implements ConfigProviderInterface,AutoloaderProviderInterface,Serv
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new User());
-                    return new TableGateway('tbl_User', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('tbl_user', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );
