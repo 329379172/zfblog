@@ -84,7 +84,7 @@
             $http.post('/api/yangqiong/exam?q=' + $scope.query).success(function(data){
                 console.log(data);
                 if(data == '') return;
-                $scope.data = JSON.parse(data);
+                $scope.data = data;
             });
         };
         $scope.data = [];
