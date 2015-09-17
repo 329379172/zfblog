@@ -86,7 +86,18 @@ return [
                             ]
                         ],
                         'may_terminate' => true,
-                    ]
+                    ],
+                    'exam' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/yangqiong/exam',
+                            'defaults' => [
+                                'controller' => 'Api\Controller\IndexController',
+                                'action' => 'exam'
+                            ]
+                        ],
+                        'may_terminate' => true,
+                    ],
                 ]
             ]
         ]

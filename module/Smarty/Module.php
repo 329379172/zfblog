@@ -27,6 +27,8 @@ class Module implements ConfigProviderInterface,ServiceProviderInterface,Autoloa
                     $smarty->setConfigDir($config['configDir']);
                     $smarty->setCompileDir($config['compileDir']);
                     $smarty->setCacheDir($config['cacheDir']);
+                    $smarty->setLeftDelimiter($config['leftDelimiter']);
+                    $smarty->setRightDelimiter($config['rightDelimiter']);
                     return $smarty;
                 }
             ]

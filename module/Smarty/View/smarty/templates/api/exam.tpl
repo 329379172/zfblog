@@ -16,10 +16,10 @@
         ===
     -->
     <meta charset="utf-8">
-    <title>MicroAutumn admin login</title>
+    <title>教育与实践问题查询</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
-    <meta name="author" content="Muhammad Usman">
+    <meta name="author" content="Xiaoqiu">
 
     <!-- The styles -->
     <link id="bs-css" href="/css/bootstrap-cerulean.min.css" rel="stylesheet">
@@ -49,63 +49,47 @@
 
     <!-- The fav icon -->
     <link rel="shortcut icon" href="/img/favicon.ico">
-
+    <script src="//libs.useso.com/js/angular.js/1.0.1/angular.min.js"></script>
 </head>
 
 <body>
-<div class="ch-container">
-    <div class="row">
-        
-    <div class="row">
-        <div class="col-md-12 center login-header">
-            <h2>Welcome to MicroAutumn</h2>
-        </div>
-        <!--/span-->
-    </div><!--/row-->
 
-    <div class="row">
-        <div class="well col-md-5 center login-box">
-            <div class="alert alert-info">
-                Please login with your Username and Password.
-            </div>
-            <form class="form-horizontal" action="/admin/login" method="post">
-                <fieldset>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user red"></i></span>
-                        <input name='name' type="text" class="form-control" placeholder="Username">
-                    </div>
-                    <div class="clearfix"></div><br>
+<div style="width:500px;margin: 30px auto 0 auto" ng-app>
 
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
-                        <input name='password' type="password" class="form-control" placeholder="Password">
-                    </div>
-                    <div class="clearfix"></div>
+    <table class="table table-striped table-bordered bootstrap-datatable datatable responsive dataTable" ng-controller="Query">
+        <tr>
+            <td colspan="2">
+                <span>
+                    <input type="text" style="width: 400px" ng-model="query" ng-change="search()"/>
+                </span>
+                <span>
+                    <a class="btn" ng-click="search()">查询</a>
+                </span>
+            </td>
+        </tr>
+        <tr ng-repeat="item in data">
+            <td>{{item[0]}}</td>
+            <td>{{item[1]}}</td>
+        </tr>
 
-                    <div class="input-prepend">
-                        <label class="remember" for="remember"><input type="checkbox" id="remember"> Remember me</label>
-                    </div>
-                    <div class="clearfix"></div>
-                    <input type="hidden" name="test" value="sss">
-                    <p class="center col-md-5">
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </p>
-                </fieldset>
-            </form>
-            <{if $error}>
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>Error!</strong> <{$error}>
-            </div>
-            <{/if}>
-        </div>
-        <!--/span-->
-    </div><!--/row-->
-</div><!--/fluid-row-->
+    </table>
 
-</div><!--/.fluid-container-->
+</div>
 
-<!-- external javascript -->
+<script>
+    function Query($scope, $http){
+        $scope.query = '';
+        $scope.search = function(){
+            if($scope == '') return;
+            $http.post('/api/yangqiong/exam?q=' + $scope.query).success(function(data){
+                console.log(data);
+                if(data == '') return;
+                $scope.data = JSON.parse(data);
+            });
+        };
+        $scope.data = [];
+    }
+</script>
 
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
@@ -115,7 +99,6 @@
 <script src='/bower_components/moment/min/moment.min.js'></script>
 <script src='/bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
 <!-- data table plugin -->
-<script src='/js/jquery.dataTables.min.js'></script>
 
 <!-- select or dropdown enhancer -->
 <script src="/bower_components/chosen/chosen.jquery.min.js"></script>
@@ -137,8 +120,6 @@
 <script src="/js/jquery.uploadify-3.1.min.js"></script>
 <!-- history.js for cross-browser state change on ajax -->
 <script src="/js/jquery.history.js"></script>
-<!-- application script for Charisma demo -->
-<script src="/js/charisma.js"></script>
 
 
 </body>

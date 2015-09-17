@@ -251,6 +251,28 @@ class IndexController extends AbstractActionController
                 break;
         }
         exit;
+    }
 
+    public function examAction(){
+        $method = $this->getRequest()->getMethod();
+        if($method == 'GET'){
+            $smarty = $this->getServiceLocator()->get('Smarty');
+            $smarty->display('api/exam.tpl');
+        }else if($method == 'POST'){
+            $yqClassTable = $this->getServiceLocator()->get('YqClassTable');
+            $query = $this->getRequest()->getQuery('q');
+            if($query){
+                $result = $yqClassTable->queryByWenti($query);
+                $ret = [];
+                foreach($result as $key => $val){
+                    $ret[] = [
+                        $val->getWenti(),
+                        $val->getDaan()
+                    ];
+                }
+                echo json_encode($ret);
+            }
+        }
+        exit;
     }
 }

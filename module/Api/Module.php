@@ -12,6 +12,8 @@ use Api\Model\Community;
 use Api\Model\CommunityTable;
 use Api\Model\ReleaseOrder;
 use Api\Model\ReleaseOrderTable;
+use Api\Model\YqClass;
+use Api\Model\YqClassTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -78,6 +80,17 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface,Dep
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new ReleaseOrder());
                     return new TableGateway('tbl_release_order',$dbAdapter,null,$resultSetPrototype);
+                },
+                'YqClassTable' => function(ServiceLocatorInterface $sm){
+                    $tableGateway = $sm->get('YqClassTableGateway');
+                    $table = new YqClassTable($tableGateway);
+                    return $table;
+                },
+                'YqClassTableGateway' => function(ServiceLocatorInterface $sm){
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new YqClass());
+                    return new TableGateway('tbl_yq_class',$dbAdapter,null,$resultSetPrototype);
                 }
             ]
         ];

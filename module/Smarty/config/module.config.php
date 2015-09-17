@@ -7,5 +7,7 @@ return [
     'cacheDir' => __DIR__ . '/../View/smarty/cache',
     'cache_lifetime' => 120,
     'debugging' => false,
-    'caching' => false
+    'caching' => false,
+    'leftDelimiter' => '<{',
+    'rightDelimiter' => '}>'
 ];
