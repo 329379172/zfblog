@@ -91,7 +91,7 @@ class IndexController extends AbstractActionController
     public function getPostCodeAction()
     {
         if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
-            echo "";
+            echo "-1";
             exit;
         }
         $log = $this->getServiceLocator()->get('log');
@@ -182,7 +182,7 @@ class IndexController extends AbstractActionController
     public function getRandomPlaceAction()
     {
         if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
-            echo "";
+            echo "-1";
             exit;
         }
         $limit = $this->params('limit');
@@ -193,7 +193,9 @@ class IndexController extends AbstractActionController
         $result = $communityTable->getRandom($limit);
         $ret = [];
         while ($row = $result->current()) {
-            $ret[] = $row->getName() . '---' . $row->getAddr();
+            if(preg_match('/.*楼$/', $row->getAddr()) > 0){
+                $ret[] = $row->getName() . '---' . $row->getAddr();
+            }
             $result->next();
         }
         echo join("\r\n", $ret);
@@ -214,6 +216,9 @@ class IndexController extends AbstractActionController
             case 'add':
                 //print_r($_GET);
                 $query = $this->getRequest()->getQuery()->toArray();
+                if(array_key_exists('token', $query)){
+                    unset($query['token']);
+                }
                 echo $db->add($query);
                 $log->addInfo('添加放单信息' . json_encode($query) . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
                 break;
@@ -241,6 +246,9 @@ class IndexController extends AbstractActionController
                 break;
             case 'save':
                 $query = $this->getRequest()->getQuery()->toArray();
+                if(array_key_exists('token', $query)){
+                    unset($query['token']);
+                }
                 $log->addInfo('保存放单信息,id:' . json_encode($query) . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
                 if(intval($query['id'])){
                     $query['id'] = intval($query['id']);

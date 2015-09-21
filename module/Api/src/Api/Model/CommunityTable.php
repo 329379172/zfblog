@@ -9,6 +9,7 @@
 namespace Api\Model;
 
 use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Where;
 use Zend\Db\TableGateway\TableGateway;
 
 class CommunityTable
@@ -23,13 +24,13 @@ class CommunityTable
 
     public function getRandom($number)
     {
-        $count = $this->tableGateway->select()->count();
+        $select = $this->tableGateway->getSql()->select();
+        $where = $select->where;
+        $where->like('addr', '%楼');
+        $count = $this->tableGateway->selectWith($select)->count();
         $offset = rand(0, $count - $number);
-
-        return $this->tableGateway->select(function (Select $select) use($offset,$number) {
-            $select->offset($offset)->limit(intval($number));
-        });
-
+        $select->offset($offset)->limit(intval($number));
+        return $this->tableGateway->selectWith($select);
     }
 
 

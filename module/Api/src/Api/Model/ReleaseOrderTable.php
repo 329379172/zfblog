@@ -1,6 +1,7 @@
 <?php
 namespace Api\Model;
 
+use Zend\Db\Sql\Insert;
 use Zend\Db\TableGateway\TableGateway;
 
 class ReleaseOrderTable{
@@ -30,7 +31,9 @@ class ReleaseOrderTable{
     public function save($model)
     {
         try{
-            $ret = $this->tableGateway->update($model,['id'=>$model['id']]);
+            $insert = $this->tableGateway->getSql()->update()->set($model)->where(['id'=>$model['id']]);
+            echo $insert->getSqlString();
+            $ret = $this->tableGateway->updateWith($insert);
             if($ret !== false){
                 return 1;
             }else{
