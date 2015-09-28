@@ -8,6 +8,17 @@ return [
                     'route' => '/api'
                 ],
                 'child_routes' => [
+                    'phpinfo' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/phpinfo',
+                            'defaults' => [
+                                'controller' => 'Api\Controller\IndexController',
+                                'action' => 'phpinfo'
+                            ]
+                        ],
+                        'may_terminate' => true
+                    ],
                     'taobao' => [
                         'type' => 'literal',
                         'options' => [

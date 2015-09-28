@@ -283,4 +283,13 @@ class IndexController extends AbstractActionController
         }
         exit;
     }
+
+    public function phpinfoAction(){
+        if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token']))
+            $return = '';
+        else
+            $return = phpinfo();
+        echo $return;
+        exit;
+    }
 }
