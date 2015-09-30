@@ -10,7 +10,7 @@ router.get('/token',function(req, res, next){
     var d = req.query.d;
     var c = req.query.c;
     if(d && c){
-        res.end(taobao.To(d + c) + '_' + d);
+        res.end(taobao.To(d + c + '8') + '_' + d);
     }else{
         res.end('');
     }
