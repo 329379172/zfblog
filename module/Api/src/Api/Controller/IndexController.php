@@ -25,12 +25,12 @@ class IndexController extends AbstractActionController
         $log->addInfo('取淘宝信息'.$this->params('name') . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
 
         $nick = urlencode($this->params('name'));
-        $redis = $this->getServiceLocator()->get('Redis');
+        //$redis = $this->getServiceLocator()->get('Redis');
         //$redis = new Redis();
-        if ($redis->getItem(md5($nick))) {
-            echo $redis->getItem(md5($nick));
-            exit;
-        }
+        //if ($redis->getItem(md5($nick))) {
+          //  echo $redis->getItem(md5($nick));
+            //exit;
+        //}
         $headers = [
             'Origin' => 'http://www.131458.com',
             'Referer' => 'http://www.131458.com/',
@@ -81,7 +81,7 @@ class IndexController extends AbstractActionController
             $info['SecurityLevel'] = str_get_html(urldecode($infojson[0]['SecurityLevel']))->find('img')[0]->attr['src'];
             $ret = json_encode($info);
             echo $ret;
-            $redis->setItem(md5($nick), $ret);
+            //$redis->setItem(md5($nick), $ret);
         } else {
             echo '';
         }
