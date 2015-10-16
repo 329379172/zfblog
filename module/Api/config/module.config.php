@@ -84,6 +84,20 @@ return [
                         ],
                         'may_terminate' => true,
                     ],
+                    'placeLooked' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/placeLooked/[:id]',
+                            'defaults' => [
+                                'controller' => 'Api\Controller\IndexController',
+                                'action' => 'placeLooked'
+                            ],
+                            'constraints' => [
+                                'id' => '\d+'
+                            ]
+                        ],
+                        'may_terminate' => true,
+                    ],
                     'releaseOrder' => [
                         'type' => 'segment',
                         'options' => [

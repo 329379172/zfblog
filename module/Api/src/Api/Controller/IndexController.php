@@ -204,6 +204,24 @@ class IndexController extends AbstractActionController
         exit;
     }
 
+    public function placeLookedAction()
+    {
+        if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
+            echo "-1";
+            exit;
+        }
+        $id = $this->params('id');
+        if(empty($id)){
+            echo 0;
+        }
+        $communityTable = $this->getServiceLocator()->get('CommunityTable');
+        $log = $this->getServiceLocator()->get('log');
+        echo $communityTable->setLooked($id);
+        $log->addInfo('设置已查看过的小区，id='.$id . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
+        exit;
+    }
+
+
     public function releaseOrderAction(){
         if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token'])){
             echo "";
@@ -283,6 +301,7 @@ class IndexController extends AbstractActionController
         }
         exit;
     }
+
 
     public function phpinfoAction(){
         if(!($this->getRequest()->getQuery('token') == $this->getServiceLocator()->get('config')['api_token']))

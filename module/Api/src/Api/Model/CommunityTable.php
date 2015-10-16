@@ -26,11 +26,16 @@ class CommunityTable
     {
         $select = $this->tableGateway->getSql()->select();
         $where = $select->where;
-        $where->like('addr', '%楼');
+        $where->like('addr', '%楼')->equalTo('looked', 0);
         $count = $this->tableGateway->selectWith($select)->count();
         $offset = rand(0, $count - $number);
         $select->offset($offset)->limit(intval($number));
         return $this->tableGateway->selectWith($select);
+    }
+
+    public function setLooked($id)
+    {
+        return $this->tableGateway->update(['looked' => 1], ['id' => intval($id)]);
     }
 
 
