@@ -250,7 +250,7 @@ class IndexController extends AbstractActionController
                     }
                     $orders[] = $tmp;
                 }
-                echo json_encode($orders, JSON_UNESCAPED_UNICODE);
+                echo json_encode($orders);
                 $log->addInfo('查询放单信息' . "\t"  . $this->getRequest()->getServer('REMOTE_ADDR') . "\t" . $this->getRequest()->getHeaders()->get('User-Agent')->getFieldValue());
                 break;
             case 'delete':
