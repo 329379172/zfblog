@@ -194,7 +194,7 @@ class IndexController extends AbstractActionController
         $ret = [];
         while ($row = $result->current()) {
             if(preg_match('/.*楼$/', $row->getAddr()) > 0){
-                $ret[] = $row->getName() . '---' . $row->getAddr();
+                $ret[] = $row->getId() . '--' . $row->getName() . '---' . $row->getAddr();
             }
             $result->next();
         }
