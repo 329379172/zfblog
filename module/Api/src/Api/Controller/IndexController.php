@@ -194,12 +194,12 @@ class IndexController extends AbstractActionController
         $ret = [];
         while ($row = $result->current()) {
             if(preg_match('/.*楼$/', $row->getAddr()) > 0){
-                $matched = preg_match('/([^\d]+)(\d+[^\d]+)/', $row->getName(), $match);
+                $matched = preg_match('/([^\d]+)(\d+[^\d]+)/', $row->getAddr(), $match);
                 //print_r($match);
                 if($matched){
-                    $ret[] = $row->getId() . '--' . $match[1] . '--' . $match[2] . '--' . $row->getName() . '---' . $row->getAddr();
+                    $ret[] = $row->getId() . '--' . $match[1] . '--' . $match[2] . '--' . $row->getName() . '--' . $match[1] . '--' . $row->getAddr();
                 }else{
-                    $ret[] = $row->getId() . '--null--null--' . $row->getName() . '---' . $row->getAddr();
+                    $ret[] = $row->getId() . '--null--null--' . $row->getName() . '--' . $row->getAddr() . '--' . $row->getAddr();;
                 }
 
             }
