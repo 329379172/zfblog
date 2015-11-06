@@ -193,7 +193,7 @@ class IndexController extends AbstractActionController
         $result = $communityTable->getRandom($limit);
         $ret = [];
         while ($row = $result->current()) {
-            if(preg_match('/.*楼$/', $row->getAddr()) > 0){
+            //if(preg_match('/.*楼$/', $row->getAddr()) > 0){
                 $matched = preg_match('/([^\d]+)(\d+[^\d]+)/', $row->getName(), $match);
                 //print_r($match);
                 if($matched){
@@ -201,8 +201,7 @@ class IndexController extends AbstractActionController
                 }else{
                     $ret[] = $row->getId() . '--null--null--' . $row->getName() . '---' . $row->getAddr();
                 }
-
-            }
+            //}
             $result->next();
         }
         echo join("\r\n", $ret);

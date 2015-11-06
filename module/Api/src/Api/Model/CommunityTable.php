@@ -26,7 +26,8 @@ class CommunityTable
     {
         $select = $this->tableGateway->getSql()->select();
         $where = $select->where;
-        $where->like('addr', '%楼')->equalTo('looked', 0);
+        //$where->like('addr', '%楼')->equalTo('looked', 0);
+        $where->equalTo('looked', 0);
         $count = $this->tableGateway->selectWith($select)->count();
         $offset = rand(0, $count - $number);
         $select->offset($offset)->limit(intval($number));
