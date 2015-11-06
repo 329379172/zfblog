@@ -197,9 +197,9 @@ class IndexController extends AbstractActionController
                 $matched = preg_match('/([^\d]+)(\d+[^\d]+)/', $row->getName(), $match);
                 //print_r($match);
                 if($matched){
-                    $ret[] = $row->getId() . '--' . $match[1] . '--' . $match[2] . '--' . $row->getName() . '---' . $row->getAddr();
+                    $ret[] = $row->getId() . '--' . $match[1] . '--' . $match[2] . '--' . $row->getName() . '--' . $row->getAddr();
                 }else{
-                    $ret[] = $row->getId() . '--null--null--' . $row->getName() . '---' . $row->getAddr();
+                    $ret[] = $row->getId() . '--null--null--' . $row->getName() . '--' . $row->getAddr();
                 }
             //}
             $result->next();
