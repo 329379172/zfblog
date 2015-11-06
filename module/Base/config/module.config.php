@@ -20,6 +20,17 @@ return [
                     ]
                 ],
                 'may_terminate' => true,
+            ],
+            'route' => [
+                'type' => 'segment',
+                'options' => [
+                    'route' => '/route',
+                    'defaults' => [
+                        'controller' => 'Base\Controller\TestController',
+                        'action' => 'route'
+                    ]
+                ],
+                'may_terminate' => true
             ]
         ]
     ],

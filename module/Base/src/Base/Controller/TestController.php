@@ -22,5 +22,21 @@ class TestController extends AbstractActionController
         exit;
     }
 
+    public function routeAction()
+    {
+        $smarty = $this->getServiceLocator()->get("Smarty");
+        $route = [
+            'phpinfo' => '/api/phpinfo',
+            'taobaoinfo' => '/api/taobao/info/[:name]',
+            'postCode' => '/api/postcode/[:name]',
+            'randomPlace' => '/api/randomPlace/[:limit]',
+            'placeLooked' => '/api/placeLooked/[:id]',
+            'releaseOrder' => '/api/release/[:act]',
+            'exam' => '/api/yangqiong/exam'
+        ];
+        $smarty->assign('routes', $route);
+        $smarty->display('test/route.tpl');
+    }
+
 
 }
