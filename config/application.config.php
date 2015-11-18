@@ -15,7 +15,8 @@ return array(
         'DbManager',
         'Application',
         'Api',
-        'Admin'
+        'Admin',
+        'Tool'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
