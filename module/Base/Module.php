@@ -35,7 +35,40 @@ class Module implements ConfigProviderInterface, AutoloaderProviderInterface, Se
     {
         return [
             'factories' => [
-                'MailOptions' => 'Base\Service\Factory\MailOptions'
+                'MailOptions' => 'Base\Service\Factory\MailOptions',
+                'CommunityTable' => function(ServiceLocatorInterface $sm){
+                    $tableGateway = $sm->get('CommunityTableGateway');
+                    $table = new CommunityTable($tableGateway);
+                    return $table;
+                },
+                'CommunityTableGateway' => function(ServiceLocatorInterface $sm){
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Community());
+                    return new TableGateway('tbl_community',$dbAdapter,null,$resultSetPrototype);
+                },
+                'ReleaseOrderTable' => function(ServiceLocatorInterface $sm){
+                    $tableGateway = $sm->get('ReleaseOrderTableGateway');
+                    $table = new ReleaseOrderTable($tableGateway);
+                    return $table;
+                },
+                'ReleaseOrderTableGateway' => function(ServiceLocatorInterface $sm){
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new ReleaseOrder());
+                    return new TableGateway('tbl_release_order',$dbAdapter,null,$resultSetPrototype);
+                },
+                'YqClassTable' => function(ServiceLocatorInterface $sm){
+                    $tableGateway = $sm->get('YqClassTableGateway');
+                    $table = new YqClassTable($tableGateway);
+                    return $table;
+                },
+                'YqClassTableGateway' => function(ServiceLocatorInterface $sm){
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new YqClass());
+                    return new TableGateway('tbl_yq_class',$dbAdapter,null,$resultSetPrototype);
+                }
             ]
         ];
     }

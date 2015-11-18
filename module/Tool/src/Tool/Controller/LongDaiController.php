@@ -9,7 +9,7 @@ namespace Tool\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 
-class LongDaiController extends AbstractActionController{
+class LongDaiController extends Controller{
 
     public function grabRedBagAction(){
         echo "actionGrabRedBag";
