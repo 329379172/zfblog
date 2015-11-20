@@ -1,37 +1,41 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: xiaoqiu
- * Date: 15/11/20
- * Time: 上午10:45
+ * User: linfeiyang
+ * Date: 2015/11/5
+ * Time: 20:18
  */
+
 return [
     'router' => [
         'routes' => [
-            'tool' => [
+            'tb-tool' => [
                 'type' => 'literal',
                 'options' => [
-                    'route' => '/tool'
+                    'route' => '/tb-tool'
                 ],
                 'child_routes' => [
-                    'longdai' => [
+                    'test' => [
                         'type' => 'literal',
                         'options' => [
-                            'route' => '/longdai',
-                        ],
-                        'child_routes' => [
-                            'longdai' => [
-                                'type' => 'literal',
-                                'options' => [
-                                    'route' => '/redbag',
-                                    'defaults' => [
-                                        'controller' => 'LongDaiController',
-                                        'action' => 'grabRedBag'
-                                    ]
-                                ],
-                                'may_terminate' => true
+                            'route' => '/test',
+                            'defaults' => [
+                                'controller' => 'TestController',
+                                'action' => 'index'
                             ]
-                        ]
+                        ],
+                        'may_terminate' => true
+                    ],
+                    'index' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '[/]',
+                            'defaults' => [
+                                'controller' => 'IndexController',
+                                'action' => 'index'
+                            ]
+                        ],
+                        'may_terminate' => true
                     ]
                 ]
             ]
@@ -39,7 +43,8 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            'LongDaiController' => 'Tool\Controller\LongDaiController',
+            'TestController' => 'TbTool\Controller\TestController',
+            'IndexController' => 'TbTool\Controller\IndexController'
         ]
     ]
 ];
