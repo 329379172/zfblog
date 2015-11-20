@@ -5,7 +5,7 @@
  * Date: 15/9/17
  * Time: 上午10:32
  */
-namespace Api\Model;
+namespace Base\Model;
 
 class YqClass{
 

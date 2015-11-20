@@ -5,7 +5,7 @@
  * Date: 15/8/13
  * Time: 上午10:08
  */
-namespace Api\Model;
+namespace Base\Model;
 
 class ReleaseOrder{
 

@@ -1,5 +1,5 @@
 <?php
-namespace Api\Model;
+namespace Base\Model;
 
 use Zend\Db\TableGateway\TableGateway;
 

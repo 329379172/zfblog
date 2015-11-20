@@ -5,9 +5,8 @@
  * Date: 15/9/17
  * Time: 上午10:36
  */
-namespace Api\Model;
+namespace Base\Model;
 
-use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Where;
 use Zend\Db\TableGateway\TableGateway;
 

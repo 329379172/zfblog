@@ -10,8 +10,10 @@ namespace Tool;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
+use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Module implements ConfigProviderInterface, DependencyIndicatorInterface, AutoloaderProviderInterface
+class Module implements ConfigProviderInterface, DependencyIndicatorInterface, AutoloaderProviderInterface, ServiceProviderInterface
 {
 
     public function getConfig()
@@ -36,6 +38,11 @@ class Module implements ConfigProviderInterface, DependencyIndicatorInterface, A
                 ]
             ]
         ];
+    }
+
+    public function getServiceConfig()
+    {
+
     }
 
 }

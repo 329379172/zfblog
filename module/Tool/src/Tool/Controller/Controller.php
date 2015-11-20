@@ -15,7 +15,8 @@ class Controller extends AbstractActionController{
 
 
     public function onDispatch(MvcEvent $e){
-        echo "onDispatch";
+
+        //echo "onDispatch";
         parent::onDispatch($e);
     }
 

@@ -6,10 +6,8 @@
  * Time: 下午6:31
  */
 
-namespace Api\Model;
+namespace Base\Model;
 
-use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Where;
 use Zend\Db\TableGateway\TableGateway;
 
 class CommunityTable

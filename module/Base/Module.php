@@ -69,6 +69,9 @@ class Module implements ConfigProviderInterface, AutoloaderProviderInterface, Se
                     $resultSetPrototype->setArrayObjectPrototype(new YqClass());
                     return new TableGateway('tbl_yq_class',$dbAdapter,null,$resultSetPrototype);
                 }
+            ],
+            'invokables' => [
+                'LongDai' => 'Base\Service\LongDaiService'
             ]
         ];
     }
