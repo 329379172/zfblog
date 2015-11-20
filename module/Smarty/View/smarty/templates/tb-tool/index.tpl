@@ -119,7 +119,7 @@
                             <p>Your custom text.</p>
                         </div>
                         <div class="tab-pane" id="order">
-                            <table class="table table-striped table-bordered responsive">
+                            <table class="table table-striped table-bordered responsive" style="margin-top: 5px">
                                 <thead>
                                 <tr>
                                     <th>Username</th>
@@ -130,8 +130,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
-
                                 <tr>
                                     <td>Muhammad Usman</td>
                                     <td class="center">2012/03/01</td>
@@ -140,15 +138,15 @@
                                         <span class="label-warning label label-default">Pending</span>
                                     </td>
                                     <td class="center">
-                                        <a class="btn btn-success" href="#">
+                                        <a class="btn btn-success btn-sm" href="#">
                                             <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                                             View
                                         </a>
-                                        <a class="btn btn-info" href="#">
+                                        <a class="btn btn-info btn-sm" href="#">
                                             <i class="glyphicon glyphicon-edit icon-white"></i>
                                             Edit
                                         </a>
-                                        <a class="btn btn-danger" href="#">
+                                        <a class="btn btn-danger btn-sm" href="#">
                                             <i class="glyphicon glyphicon-trash icon-white"></i>
                                             Delete
                                         </a>
@@ -162,15 +160,15 @@
                                         <span class="label-warning label label-default">Pending</span>
                                     </td>
                                     <td class="center">
-                                        <a class="btn btn-success" href="#">
+                                        <a class="btn btn-success btn-sm" href="#">
                                             <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                                             View
                                         </a>
-                                        <a class="btn btn-info" href="#">
+                                        <a class="btn btn-info btn-sm" href="#">
                                             <i class="glyphicon glyphicon-edit icon-white"></i>
                                             Edit
                                         </a>
-                                        <a class="btn btn-danger" href="#">
+                                        <a class="btn btn-danger btn-sm" href="#">
                                             <i class="glyphicon glyphicon-trash icon-white"></i>
                                             Delete
                                         </a>
@@ -184,15 +182,15 @@
                                         <span class="label-warning label label-default">Pending</span>
                                     </td>
                                     <td class="center">
-                                        <a class="btn btn-success" href="#">
+                                        <a class="btn btn-success btn-sm" href="#">
                                             <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                                             View
                                         </a>
-                                        <a class="btn btn-info" href="#">
+                                        <a class="btn btn-info btn-sm" href="#">
                                             <i class="glyphicon glyphicon-edit icon-white"></i>
                                             Edit
                                         </a>
-                                        <a class="btn btn-danger" href="#">
+                                        <a class="btn btn-danger btn-sm" href="#">
                                             <i class="glyphicon glyphicon-trash icon-white"></i>
                                             Delete
                                         </a>
@@ -206,15 +204,15 @@
                                         <span class="label-warning label label-default">Pending</span>
                                     </td>
                                     <td class="center">
-                                        <a class="btn btn-success" href="#">
+                                        <a class="btn btn-success btn-sm" href="#">
                                             <i class="glyphicon glyphicon-zoom-in icon-white"></i>
                                             View
                                         </a>
-                                        <a class="btn btn-info" href="#">
+                                        <a class="btn btn-info btn-sm" href="#">
                                             <i class="glyphicon glyphicon-edit icon-white"></i>
                                             Edit
                                         </a>
-                                        <a class="btn btn-danger" href="#">
+                                        <a class="btn btn-danger btn-sm" href="#">
                                             <i class="glyphicon glyphicon-trash icon-white"></i>
                                             Delete
                                         </a>
