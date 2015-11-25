@@ -77,10 +77,11 @@ class Module implements ConfigProviderInterface, AutoloaderProviderInterface, Se
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new YqClass());
                     return new TableGateway('tbl_yq_class',$dbAdapter,null,$resultSetPrototype);
-                }
+                },
+                'redis-cli' => 'Base\Service\Factory\RedisFactory'
             ],
             'invokables' => [
-                'LongDai' => 'Base\Service\LongDaiService'
+                'LongDai' => 'Base\Service\LongDaiService',
             ]
         ];
     }

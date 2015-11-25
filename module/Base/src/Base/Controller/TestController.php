@@ -15,10 +15,15 @@ class TestController extends AbstractActionController
 
     public function testAction()
     {
-        $mailOptions = $this->getServiceLocator()->get('MailOptions');
-        echo $mailOptions->getMailFrom();
-        echo '<br/>';
-        echo $mailOptions->getMailTo();
+        //$mailOptions = $this->getServiceLocator()->get('MailOptions');
+        //echo $mailOptions->getMailFrom();
+        //echo '<br/>';
+        //echo $mailOptions->getMailTo();
+        $redis = $this->getServiceLocator()->get('redis-cli');
+        //var_dump($redis);
+        //$redis->set('foo', 'bar');
+        $value = $redis->get('foo');
+        echo $value;
         exit;
     }
 

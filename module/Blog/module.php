@@ -86,9 +86,6 @@ class Module implements ConfigProviderInterface,AutoloaderProviderInterface,Serv
                     $smarty->setCompileDir(__DIR__ . '/view/smarty/templates_c');
                     $smarty->setCacheDir(__DIR__ . '/view/smarty/cache');
                     return $smarty;
-                },
-                'Redis' => function(ServiceLocatorInterface $sm){
-                    return StorageFactory::factory($sm->get('config')['Redis']);
                 }
             ]
         ];

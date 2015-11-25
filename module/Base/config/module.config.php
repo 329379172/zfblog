@@ -46,5 +46,10 @@ return [
     'xq_mail' => [
         'mail_to' => '329379172@qq.com',
         'mail_from' => '329379172@qq.com'
+    ],
+    'redis' => [
+        'scheme' => 'tcp',
+        'host' => 'redis',
+        'port' => 6379
     ]
 ];
