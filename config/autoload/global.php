@@ -31,5 +31,6 @@ return [
         'username' => 'root',
         'password' => '123456',
         'dbname' => 'blog'
-    ]
+    ],
+    'api_token' => 'hehedaxq123'
 ];
