@@ -31,16 +31,5 @@ return [
         'username' => 'root',
         'password' => '123456',
         'dbname' => 'blog'
-    ],
-    'mail' => [
-        'name' => 'qq',
-        'host' => 'smtp.qq.com',
-        'connection_class' => 'login',
-        'connection_config' => [
-            'username' => '',
-            'password' => ''
-        ]
-    ],
-    'mailTo' => '',
-    'mailFrom' => ''
+    ]
 ];
