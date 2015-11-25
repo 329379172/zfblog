@@ -16,7 +16,8 @@ return array(
         'Application',
         'Api',
         'Admin',
-        'Tool'
+        'Tool',
+        'TbTool'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

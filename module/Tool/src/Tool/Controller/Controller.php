@@ -13,11 +13,30 @@ use Zend\Mvc\MvcEvent;
 
 class Controller extends AbstractActionController{
 
+    protected $smarty;
+
+    /**
+     * @return mixed
+     */
+    public function getSmarty()
+    {
+        return $this->smarty;
+    }
+
+    /**
+     * @param mixed $smarty
+     */
+    public function setSmarty($smarty)
+    {
+        $this->smarty = $smarty;
+    }
 
     public function onDispatch(MvcEvent $e){
-
-        //echo "onDispatch";
+        $this->smarty = $this->serviceLocator->get('Smarty');
         parent::onDispatch($e);
     }
+
+
+
 
 }
