@@ -7,10 +7,19 @@
  */
 namespace Base;
 
+use Base\Model\Community;
+use Base\Model\CommunityTable;
+use Base\Model\ReleaseOrder;
+use Base\Model\ReleaseOrderTable;
+use Base\Model\YqClass;
+use Base\Model\YqClassTable;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ControllerProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Module implements ConfigProviderInterface, AutoloaderProviderInterface, ServiceProviderInterface, ControllerProviderInterface
 {
