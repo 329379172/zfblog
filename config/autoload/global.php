@@ -19,27 +19,18 @@ return [
     ],
     'db' => [
         'driver'         => 'Pdo',
-        'dsn'            => 'mysql:dbname=dbname;host=localhost',
+        'dsn'            => 'mysql:dbname=blog;host=mysql',
         'driver_options' => [
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ],
-        'username' => '',
-        'password' => ''
-    ],
-    'Redis' => [
-        'adapter' => 'redis',
-        'options' => [
-            'server' => [
-                'host' => '',
-                'port' => 6379
-            ]
-        ]
+        'username' => 'root',
+        'password' => '123456'
     ],
     'mysqli' => [
-        'host' => '',
-        'username' => '',
-        'password' => '',
-        'dbname' => ''
+        'host' => 'mysql',
+        'username' => 'root',
+        'password' => '123456',
+        'dbname' => 'blog'
     ],
     'mail' => [
         'name' => 'qq',
